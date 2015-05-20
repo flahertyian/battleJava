@@ -1,6 +1,7 @@
 import java.util.*;
+import javax.swing.JFrame;
 
-public class BattleJava {
+public class BattleJava extends JFrame{
 
    public static final int WIDTH = 8;
    public static final int HEIGHT = 8;
@@ -25,6 +26,15 @@ public class BattleJava {
       else {
          System.out.println("YOU WON!!!");
       }
+
+
+
+      /**
+         if(all ships are entered and happy){
+            add Jpanel to JFrame
+            make Frame visibale
+         }
+         */
    }
 
    public static Fleet placePlayerShips(Scanner user, int [][] pBoard){
@@ -214,5 +224,11 @@ public class BattleJava {
          return true;
       }
       return false;
+   }
+
+   @Override
+   private void paintComponent(Graphics g){
+      super.paintComponent(g);
+
    }
 }
