@@ -1,12 +1,27 @@
 import java.util.*;
 import javax.swing.JFrame;
 
-public class BattleJava extends JFrame{
+public class BattleJava {
 
    public static final int WIDTH = 8;
    public static final int HEIGHT = 8;
 
    public static void main (String [] args){
+
+      JFrame frame = new JFrame();
+      frame.setSize(400,800);
+      frame.setResizable(false);
+      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      frame.setTitle("BattleJava!!!");
+      frame.setLocationRelativeTo(null);
+      frame.setVisible(true);
+
+      /**
+         if(all ships are entered and happy){
+            add Jpanel to JFrame
+            make Frame visibale
+         }
+         */
       System.out.println("WELCOME TO BattleJava!!!");
       Scanner user = new Scanner(System.in);
       int [][] pBoard= new int [HEIGHT][WIDTH];
@@ -27,14 +42,6 @@ public class BattleJava extends JFrame{
          System.out.println("YOU WON!!!");
       }
 
-
-
-      /**
-         if(all ships are entered and happy){
-            add Jpanel to JFrame
-            make Frame visibale
-         }
-         */
    }
 
    public static Fleet placePlayerShips(Scanner user, int [][] pBoard){
@@ -226,9 +233,9 @@ public class BattleJava extends JFrame{
       return false;
    }
 
-   @Override
-   private void paintComponent(Graphics g){
-      super.paintComponent(g);
+   // @Override
+   // private void paintComponent(Graphics g){
+   //    super.paintComponent(g);
 
-   }
+   // }
 }
