@@ -42,8 +42,9 @@ public class OceanPanel{
                   JButton temp =(JButton)e.getSource();
                   temp.setIcon(hit);
                 //}else{
-                  //e.getSource.setIcon(miss);
-                //}
+                  // JButton temp =(JButton)e.getSource();
+                  // temp.setIcon(hit);
+              //}
               }
             });
             btn.setPreferredSize(new Dimension(20, 20));
