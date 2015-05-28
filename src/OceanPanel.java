@@ -13,21 +13,28 @@ public class OceanPanel implements ActionListener{
    private int sizeY;
    GridLayout grid;
    JPanel panel;
+   Icon hit;
+   Icon miss;
 
    public OceanPanel(int sizeX, int sizeY){
       this.sizeY = sizeY;
       this.sizeX = sizeX;
       this.grid = new GridLayout(10,10);
       this.panel = new JPanel(grid);
+      hit = new ImageIcon("../resource/battleJavaHit.gif");
+      miss = new ImageIcon("../resource/battleJavaMiss.gif");
       drawBoard();
    }
 
    private void drawBoard(){
-      Icon hitIcon = new ImageIcon("hit.gif");
+      Icon background = new ImageIcon("../resource/battleJavaBase.gif");
+      // if(background!=null){
+      //   System.out.print("battleJavaBase was reached");
+      // }
 
       for(int i = 0; i<sizeY; i++){
          for(int j =0; j<sizeX; j++){
-            JButton btn = new JButton(hitIcon);
+            JButton btn = new JButton(background);
             btn.setPreferredSize(new Dimension(20, 20));
             panel.add(btn);
          }
