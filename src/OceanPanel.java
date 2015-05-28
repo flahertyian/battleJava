@@ -8,7 +8,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.*;
 
-public class OceanPanel implements ActionListener{
+public class OceanPanel{
    private int sizeX;
    private int sizeY;
    GridLayout grid;
@@ -35,6 +35,17 @@ public class OceanPanel implements ActionListener{
       for(int i = 0; i<sizeY; i++){
          for(int j =0; j<sizeX; j++){
             JButton btn = new JButton(background);
+            btn.addActionListener(new ActionListener(){
+              public void actionPerformed(ActionEvent e){
+                System.out.println(System.currentTimeMillis());
+                //if(is ship){
+                  JButton temp =(JButton)e.getSource();
+                  temp.setIcon(hit);
+                //}else{
+                  //e.getSource.setIcon(miss);
+                //}
+              }
+            });
             btn.setPreferredSize(new Dimension(20, 20));
             panel.add(btn);
          }
@@ -53,11 +64,6 @@ public class OceanPanel implements ActionListener{
 
    public JPanel getPanel(){
       return this.panel;
-   }
-   public void actionPerformed(ActionEvent event){
-
-
-
    }
 
 
