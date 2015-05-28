@@ -15,6 +15,7 @@ public class BattleJava {
       frame.setTitle("BattleJava!!!");
       frame.setLocationRelativeTo(null);
       frame.setVisible(true);
+      
 
       /**
          if(all ships are entered and happy){
