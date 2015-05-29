@@ -2,33 +2,65 @@ import java.util.*;
 
 public class Fleet {
 
-   ArrayList<Ship> boats;
-
+   private ArrayList<Ship> boats;
+   
    public Fleet () {
       this.boats = new ArrayList <Ship> ();
    }
-
+   
    public boolean floating (){
-      for(Ship boat : boats){
-         if(boat.length-boat.hitsTaken>0){
+      for(Ship boat : this.boats){
+         if(boat.getLength()-boat.getHits()>0){
             return true;
          }
       }
       return false;
    }
-
+   
    public void hit (int row,int col){
       for(Ship boat: this.boats){
-         for(int i = 0; i < boat.length; i++){
-            if(boat.coordinates[i][0] == row & boat.coordinates[i][1] == col){
-               boat.hitsTaken++;
-               if (boat.hitsTaken == boat.length){
+         for(int i = 0; i < boat.getLength(); i++){
+            if(boat.getCoordinate(i,0) == row & boat.getCoordinate(i,1) == col){
+               boat.hit();
+               if (boat.getHits() == boat.getLength()){
                   System.out.print(" AND SUNK");
                }
             }
          }
       }
    }
-
-
+   
+   public ArrayList<Ship> getBoats (){
+      return this.boats;
+   }
+   
+   public void addShip (Ship boat){
+      this.boats.add(boat);
+   }
+   
+   public int getShortestBoard() {
+      ArrayList<Integer> lengths = new ArrayList <Integer> ();
+      for(Ship boat : this.boats){
+         if (boat.getHits() != boat.getLength()){
+            lengths.add(boat.getLength());
+         }
+      }
+      int min = lengths.get(0);
+      for(int i = 1; i<lengths.size(); i++){
+         if (lengths.get(i)<min){
+            min = lengths.get(i);
+         }
+      }
+      return min;
+   }
+   
+   public ArrayList <Integer> getAllLengths() {
+      ArrayList<Integer> lengths = new ArrayList <Integer> ();
+      for(Ship boat : this.boats){
+         if (boat.getHits() != boat.getLength()){
+            lengths.add(boat.getLength());
+         }
+      }
+      return lengths;
+   }
 }
