@@ -1,7 +1,6 @@
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-import javax.swing.JButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Dimension;
@@ -21,26 +20,23 @@ public class OceanPanel{
       this.sizeX = sizeX;
       this.grid = new GridLayout(10,10);
       this.panel = new JPanel(grid);
-      hit = new ImageIcon("../resource/battleJavaHit.gif");
-      miss = new ImageIcon("../resource/battleJavaMiss.gif");
       drawBoard();
    }
 
    private void drawBoard(){
-      Icon background = new ImageIcon("../resource/battleJavaBase.gif");
-      // if(background!=null){
-      //   System.out.print("battleJavaBase was reached");
-      // }
+
 
       for(int i = 0; i<sizeY; i++){
          for(int j =0; j<sizeX; j++){
-            JButton btn = new JButton(background);
+            Point btn = new Point(j,i);
             btn.addActionListener(new ActionListener(){
               public void actionPerformed(ActionEvent e){
-                System.out.println(System.currentTimeMillis());
                 //if(is ship){
-                  JButton temp =(JButton)e.getSource();
-                  temp.setIcon(hit);
+                  Point temp =(Point)e.getSource();
+                  temp.setHit();
+                  Dimension dimension = temp.getDimension();
+                  System.out.println(dimension.getHeight() + " : " + dimension.getWidth());
+
                 //}else{
                   // JButton temp =(JButton)e.getSource();
                   // temp.setIcon(hit);
