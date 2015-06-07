@@ -14,35 +14,46 @@ public class OceanPanel{
    JPanel panel;
    Icon hit;
    Icon miss;
+   int[][] enemyOcean;
+   Point[][] enemyBoard;
+   
 
    public OceanPanel(int sizeX, int sizeY){
       this.sizeY = sizeY;
       this.sizeX = sizeX;
       this.grid = new GridLayout(10,10);
       this.panel = new JPanel(grid);
+      this.boats = boats;
       drawBoard();
+   }
+   
+   public void setEnemyOcean(int[][] enemyOcean){
+      this.enemyOcean = enemyOcean;
    }
 
    private void drawBoard(){
-
-
+   
+   
       for(int i = 0; i<sizeY; i++){
          for(int j =0; j<sizeX; j++){
             Point btn = new Point(j,i);
-            btn.addActionListener(new ActionListener(){
-              public void actionPerformed(ActionEvent e){
-                //if(is ship){
-                  Point temp =(Point)e.getSource();
-                  temp.setHit();
-                  Dimension dimension = temp.getDimension();
-                  System.out.println(dimension.getHeight() + " : " + dimension.getWidth());
-
-                //}else{
-                  // JButton temp =(JButton)e.getSource();
-                  // temp.setIcon(hit);
-              //}
-              }
-            });
+            btn.addActionListener(
+                  new ActionListener(){
+                     public void actionPerformed(ActionEvent e){
+                        Point temp =(Point)e.getSource();
+                        Dimension dimension = temp.getDimension();
+                        if(enemyOcean[(int)dimension.getHeight()][(int)dimension.getWidth()] == 1){
+                           
+                           temp.setHit();
+                           
+                           //System.out.println(dimension.getHeight() + " : " + dimension.getWidth());
+                        
+                        }
+                       else{
+                           temp.setMiss();
+                        }
+                     }
+                  });
             btn.setPreferredSize(new Dimension(20, 20));
             panel.add(btn);
          }
@@ -52,9 +63,9 @@ public class OceanPanel{
     // g2d.setColor(Color.BLUE);
     // for(int r = 0; r < sizeX; r ++){
     //   for(int c = 0; c < sizeY; c++) {
-
+   
         //the drawing of the cubes to the image
-
+   
     //   }
     // }
    }
@@ -62,6 +73,21 @@ public class OceanPanel{
    public JPanel getPanel(){
       return this.panel;
    }
+   
+   public Point[][] getBoard(){
+      return enemyBoard;
+   }
+   
+   private void makeButtonArr(){
+      enemyBoard = new Point[sizeX][sizeY];
+      for(int y = 0; y<sizeY; y++){
+         for(int x =0; x<sizeX; x++){
+            enemyBoard[x][y] = new Point(x,y);
+         }
+      }
+   }
+   
+
 
 
 }

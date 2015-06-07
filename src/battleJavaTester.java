@@ -17,6 +17,12 @@ public class battleJavaTester {
       frame.setLocationRelativeTo(null);
 
       OceanPanel panel1 = new OceanPanel(10, 10);
+      int[][] enemyOcean = new int[10][10];
+      for(int i = 0; i < 9; i++){
+         enemyOcean [i][i] = 1;
+         enemyOcean[i+1][i] = 1;
+      }
+      panel1.setEnemyOcean(enemyOcean);
       PlayerPanel panel2 = new PlayerPanel(10, 10);
       //panel.setSize( 400,800 );
       //panel.setMinimumSize(panel.getPreferredSize());
