@@ -19,8 +19,18 @@ public class Ship {
             this.coordinates [i][1] = col+i;
          }
          else if (direction == 0){
-            this.coordinates [i][0] = row + i;
+            this.coordinates [i][0] = row - i;
+            this.coordinates [i][1] = col ;
+         }
+         else if (direction == 2){
+            this.coordinates [i][0] = row+i;
             this.coordinates [i][1] = col;
+         
+         }
+         else if (direction == 3){
+            this.coordinates [i][0] = row;
+            this.coordinates [i][1] = col-i;
+         
          }
       }
       this.hitsTaken = 0;
