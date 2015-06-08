@@ -10,14 +10,14 @@ import java.util.*;
 public class PlayerPanel{
   private int sizeX;
   private int sizeY;
-  GridLayout grid;
-  JPanel panel;
-  Icon hit;
-  Icon miss;
-  boolean second;
-  Dimension curHeadDim;
-  Dimension curTailDim;
-  Point[][] playerBoard;
+  private GridLayout grid;
+  private JPanel panel;
+  private Icon hit;
+  private Icon miss;
+  private boolean second;
+  private Dimension curHeadDim;
+  private Dimension curTailDim;
+  private Point[][] playerBoard;
 
   public PlayerPanel(int sizeX, int sizeY){
     this.sizeY = sizeY;
@@ -70,7 +70,7 @@ public class PlayerPanel{
                   }
                 }else if(curTailDim.getWidth()<curHeadDim.getWidth()){ //left (x-)
                   for(int t = 0; t <= xDif; t++){
-                    playerBoard[(int)curHeadDim.getWidth()-t][(int)curHeadDim.getHeight()-t].setShip();
+                    playerBoard[(int)curHeadDim.getWidth()-t][(int)curHeadDim.getHeight()].setShip();
                   }
                 }
                 second = false;
@@ -83,7 +83,6 @@ public class PlayerPanel{
               Point temp = (Point)e.getSource();
               curHeadDim = temp.getDimension();
               second = true;
-              System.out.println("first click");
             }
           }});
           Point temp = playerBoard[i][j];
@@ -95,5 +94,11 @@ public class PlayerPanel{
     public JPanel getPanel(){
     return panel;
     }
+
+    //will return the state of the ships and their locations
+    public Point[][] getGameState(){
+      return playerboard;
+    }
+
   }
 

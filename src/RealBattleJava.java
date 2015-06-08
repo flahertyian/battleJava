@@ -3,13 +3,13 @@ import java.awt.Dimension;
 
 public class RealBattleJava {
 
-   public static final int WIDTH = 8;
-   public static final int HEIGHT = 8;
+   public static final int WIDTH = 10;
+   public static final int HEIGHT = 10;
    public static final int MAXCPULEVEL = 10;
     
     
    public static void main (String [] args){
-      System.out.println("WELCOME TO BattleJava!!!");
+      // System.out.println("WELCOME TO BattleJava!!!");
       Scanner user = new Scanner(System.in);
       int cpuLevel  = chooseCPULevel(user);
       int [][] pBoard= new int [HEIGHT][WIDTH];
@@ -30,7 +30,26 @@ public class RealBattleJava {
       else {
          System.out.println("YOU WON!!!");
       }
+     
    }
+   
+   public static int guessCounter(int cpuLevel){
+      int counter = 0;
+      for(int i = 0; i <1000; i++){
+         int [][] board = new int [HEIGHT][WIDTH];
+         Fleet boats = placeCPUShips(board);
+         while(boats.floating()){
+            int random = (int) (Math.random()*10);
+            takeCTurn(boats, board, cpuLevel, random);
+            counter++;
+         }
+         System.out.println(i);
+      }
+      System.out.println("Level " + cpuLevel + ": " + (counter/1000.0));
+   }
+      
+
+      
    
    public static int chooseCPULevel (Scanner user) {
       System.out.println();
@@ -129,7 +148,7 @@ public class RealBattleJava {
   
    public static void printPBoard (int [][] board){
       System.out.println("YOUR SHIPS");
-      System.out.println("  0  1  2  3  4  5  6  7 ");
+      System.out.println("  0  1  2  3  4  5  6  7  8  9 ");
       for(int row = 0; row< HEIGHT; row++){
          System.out.print(row);
             //Change to number
@@ -156,7 +175,7 @@ public class RealBattleJava {
    
    public static void printCBoard (int [][] board){
       System.out.println("OPPONENT'S SHIPS");
-      System.out.println("  0  1  2  3  4  5  6  7 ");
+      System.out.println("  0  1  2  3  4  5  6  7  8  9");
       for(int row = 0; row< HEIGHT; row++){
          System.out.print(row);
             //Change to letter
@@ -224,8 +243,10 @@ public class RealBattleJava {
       if(cpuLevel == 6){
          smartCoordinate = noSurrounded(row, col, board, 2);
       }
-      row = smartCoordinate [0];
-      col = smartCoordinate [1];   
+      if(cpuLevel >= 6){
+         row = smartCoordinate [0];
+         col = smartCoordinate [1];   
+      }
       if((cpuLevel >= 2 && random >= 8 )||(cpuLevel >= 3 && random >= 5)||(cpuLevel>=4 && random >= 3)||(cpuLevel>=5)){
          ArrayList<Integer> rows = new ArrayList<Integer> ();
          ArrayList<Integer> cols = new ArrayList<Integer> ();
@@ -239,22 +260,61 @@ public class RealBattleJava {
                      }
                   }
                   int rand = (int) (Math.random()*4);
-                  System.out.print("Rows size = " + rows.size() + "");
                   if(rows.size() > 1){
                      if(rows.get(0) == rows.get(1)){
-                        System.out.println("Same row!");
-                        int dir = 0;
-                        row = rows.get(0);
-                        col = getLateHit(cols, col, rand, cpuLevel, row, board, dir);
+                        int max = -1;
+                        int min = WIDTH;
+                        for(int j = 0; j< cols.size(); j++){
+                           if(cols.get(j)>max){
+                              max = cols.get(j)*1;
+                           }
+                           if(cols.get(j)<min){
+                              min = cols.get(j)*1;
+                           }
+                        }
+                        System.out.print(max + "" + min);
+                        if (max > min+cols.size()-1){
+                           for(int i = 1; i < max-min; i++){
+                              if(board[rows.get(0)][min+i] < 2){
+                                 col = min+i;
+                              }
+                           }
+                           row = rows.get(0);  
+                        }
+                        else { 
+                           int dir = 0;
+                           row = rows.get(0);
+                           col = getLateHit(cols, col, rand, cpuLevel, row, board, dir);
+                        }
                      }
                      else if (cols.get(0) == cols.get(1)){
-                        System.out.println("Same col!");
-                        int dir = 1;
-                        col = cols.get(0);
-                        row = getLateHit(rows, row, rand, cpuLevel, col, board, dir);
-                        
+                        int max = -1;
+                        int min = HEIGHT;
+                        for(int j = 0; j< rows.size(); j++){
+                           if(rows.get(j)>max){
+                              max = rows.get(j)*1;
+                           }
+                           if(rows.get(j)<min){
+                              min = rows.get(j)*1;
+                           }
+                        }
+                        if (max > min+rows.size()-1){
+                           for(int i = 1; i < max-min; i++){
+                              if(board[min+i][cols.get(0)] < 2){
+                                 row = min+i;
+                              }
+                           }
+                           col = cols.get(0);  
+                        }                        
+                        else { 
+                           int dir = 1;
+                           col = cols.get(0);
+                           row = getLateHit(rows, row, rand, cpuLevel, col, board, dir);
+                        }
                      }
                   }
+                  
+                  
                   else{
                      row = rows.get(0);
                      col = cols.get(0);
@@ -268,18 +328,18 @@ public class RealBattleJava {
                            }
                         }
                      }
-                        if(rand==0){
-                           row--;
-                        }
-                        else if (rand==1){
-                            col++;
-                        }
-                        else if (rand==2){
-                           row++;
-                        }
-                        else if (rand==3){
-                           col--;
-                        }
+                     if(rand==0){
+                        row--;
+                     }
+                     else if (rand==1){
+                        col++;
+                     }
+                     else if (rand==2){
+                        row++;
+                     }
+                     else if (rand==3){
+                        col--;
+                     }
                   }  
                   break findHit;
                }
@@ -555,4 +615,4 @@ public class RealBattleJava {
       return false;
    }
                 
-}     
+}
