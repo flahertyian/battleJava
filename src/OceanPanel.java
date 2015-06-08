@@ -16,9 +16,12 @@ public class OceanPanel{
    Icon miss;
    int[][] enemyOcean;
    Point[][] enemyBoard;
+   Fleet boats;
+   int HEIGHT = 10;
+   int WIDTH = 10;
    
 
-   public OceanPanel(int sizeX, int sizeY){
+   public OceanPanel(int sizeX, int sizeY, Fleet boats){
       this.sizeY = sizeY;
       this.sizeX = sizeX;
       this.grid = new GridLayout(10,10);
@@ -33,18 +36,29 @@ public class OceanPanel{
 
    private void drawBoard(){
    
-   
+      makeButtonArr();
       for(int i = 0; i<sizeY; i++){
          for(int j =0; j<sizeX; j++){
-            Point btn = new Point(j,i);
-            btn.addActionListener(
+            //Point btn = new Point(j,i);
+            enemyBoard[i][j].addActionListener(
                   new ActionListener(){
                      public void actionPerformed(ActionEvent e){
                         Point temp =(Point)e.getSource();
                         Dimension dimension = temp.getDimension();
-                        if(enemyOcean[(int)dimension.getHeight()][(int)dimension.getWidth()] == 1){
+                        takePTurn (boats, enemyOcean, (int)dimension.getHeight(), (int)dimension.getWidth(), temp, enemyBoard);
+                                          
+
+                        
+                        
+                        
+                        /*if(enemyOcean[(int)dimension.getHeight()][(int)dimension.getWidth()] == 1){
                            
                            temp.setHit();
+                           
+                           
+                           //check if sunk, change if so
+                           
+                           //call CPU Guesser
                            
                            //System.out.println(dimension.getHeight() + " : " + dimension.getWidth());
                         
@@ -52,12 +66,16 @@ public class OceanPanel{
                        else{
                            temp.setMiss();
                         }
+                        */
                      }
                   });
-            btn.setPreferredSize(new Dimension(20, 20));
-            panel.add(btn);
+            enemyBoard[i][j].setPreferredSize(new Dimension(20, 20));
+            panel.add(enemyBoard[i][j]);
          }
       }
+      
+      
+      
       // g2d.setColor(Color.BLACK);
     // g2d.fillRect(0,0,sizeX,sizeX);
     // g2d.setColor(Color.BLUE);
@@ -69,6 +87,36 @@ public class OceanPanel{
     //   }
     // }
    }
+   
+    public static void takePTurn (Fleet boats, int [][] board, int row, int col, Point temp, Point [][] enemyBoard){
+         if(shotValidity(row, col, board)){
+         board[row][col] += 2;
+         if (board[row][col] == 2){
+            temp.setMiss();
+            //System.out.println("MISS!");
+         }
+         else {
+            temp.setHit();
+            //System.out.print("HIT");
+            boats.hit(row, col, enemyBoard);
+            //System.out.println("!");
+         }  
+      }
+      //else{
+         //System.out.println("Invalid shot. Try again.");
+         //takePTurn(boats, board, user);
+         //look at
+      //}
+   }
+   
+   public static boolean shotValidity (int row, int col, int [][] board){
+      if (row < 10 && 0<= row && col < 10 && 0 <= col && board[row][col]<2){
+         return true;
+      }
+      return false;
+   }
+
+
 
    public JPanel getPanel(){
       return this.panel;
