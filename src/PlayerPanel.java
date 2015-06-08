@@ -64,7 +64,7 @@ public class PlayerPanel{
                   if(testValidity(boat)){
                     for(int t = 0;t<= yDif; t++){
                       playerBoard[(int)curHeadDim.getWidth()][(int)curHeadDim.getHeight()+t].setShip();
-                      intBoard[(int)curHeadDim.getHeight()][(int)curHeadDim.getWidth()+t] = 1;
+                      intBoard[(int)curHeadDim.getHeight()+t][(int)curHeadDim.getWidth()] = 1;
                     }
                   }
 
@@ -73,7 +73,7 @@ public class PlayerPanel{
                   if(testValidity(boat)){
                     for(int t = 0;t<= yDif; t++){
                       playerBoard[(int)curHeadDim.getWidth()][(int)curHeadDim.getHeight()-t].setShip();
-                      intBoard[(int)curHeadDim.getHeight()][(int)curHeadDim.getWidth()-t] = 1;
+                      intBoard[(int)curHeadDim.getHeight()-t][(int)curHeadDim.getWidth()] = 1;
                     }
                   }
                 }else if(curTailDim.getWidth()>curHeadDim.getWidth()){ // right (x+)
@@ -81,15 +81,15 @@ public class PlayerPanel{
                   if(testValidity(boat)){
                     for(int t = 0; t<= xDif; t++){
                       playerBoard[(int)curHeadDim.getWidth()+t][(int)curHeadDim.getHeight()].setShip();
-                      intBoard[(int)curHeadDim.getHeight()+t][(int)curHeadDim.getWidth()] = 1;
+                      intBoard[(int)curHeadDim.getHeight()][(int)curHeadDim.getWidth()+t] = 1;
                     }
                   }
                 }else if(curTailDim.getWidth()<curHeadDim.getWidth()){ //left (x-)
                   Ship boat = new Ship(xDif,(int)curHeadDim.getHeight(),(int)curHeadDim.getWidth(),3);
                   if(testValidity(boat)){
                     for(int t = 0; t <= xDif; t++){
-                      playerBoard[(int)curHeadDim.getWidth()-t][(int)curHeadDim.getWidth()].setShip();
-                      intBoard[(int)curHeadDim.getHeight()-t][(int)curHeadDim.getWidth()] = 1;
+                      playerBoard[(int)curHeadDim.getWidth()-t][(int)curHeadDim.getHeight()].setShip();
+                      intBoard[(int)curHeadDim.getHeight()][(int)curHeadDim.getWidth()-t] = 1;
                     }
                   }
                 }
