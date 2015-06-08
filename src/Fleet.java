@@ -23,8 +23,11 @@ public class Fleet {
             if(boat.getCoordinate(i,0) == row & boat.getCoordinate(i,1) == col){
                boat.hit();
                if (boat.getHits() == boat.getLength()){
-                  System.out.print(" AND SUNK");
-                  enemyBoard[0][0].setShip();
+                  for(int j = 0; j<boat.getLength(); j++){
+                     System.out.print(boat.getCoordinate(j,0) + "" + boat.getCoordinate(j,1));
+                     enemyBoard[boat.getCoordinate(j,1)][boat.getCoordinate(j,0)].setShip();
+                  }
+                  
                }
             }
          }
