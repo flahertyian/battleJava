@@ -18,13 +18,15 @@ public class PlayerPanel{
   private Dimension curHeadDim;
   private Dimension curTailDim;
   private Point[][] playerBoard;
+  private int[][] intBoard;
 
-  public PlayerPanel(int sizeX, int sizeY){
+  public PlayerPanel(int sizeX, int sizeY, int[][] intBoard){
     this.sizeY = sizeY;
     this.sizeX = sizeX;
     this.grid = new GridLayout(10,10);
     this.panel = new JPanel(grid);
     second = false;
+    this.intBoard = intBoard;
     makeButtonArr();
     drawBoard();
 
@@ -51,15 +53,21 @@ public class PlayerPanel{
               Point temp =(Point)e.getSource();
               curTailDim = temp.getDimension();
 
+              // 0 no boat, 1 boat, 2 miss, 3 hitt
               if(curHeadDim.getWidth() == curTailDim.getWidth()||
                 curHeadDim.getHeight() == curTailDim.getHeight()){
                 int xDif = (int)Math.abs((Double)(curHeadDim.getWidth() - curTailDim.getWidth()));
                 int yDif = (int)Math.abs((Double)(curHeadDim.getHeight() - curTailDim.getHeight()));
 
                 if(curTailDim.getHeight()>curHeadDim.getHeight()){//below (y+)
-                  for(int t = 0;t<= yDif; t++){
-                    playerBoard[(int)curHeadDim.getWidth()][(int)curHeadDim.getHeight()+t].setShip();
+                  Ship boat = new Ship(yDif,(int)curHeadDim.getWidth(),(int)curHeadDim.getHeight(),2);
+                  if(testValidity(boat)){
+                    for(int t = 0;t<= yDif; t++){
+                      playerBoard[(int)curHeadDim.getWidth()][(int)curHeadDim.getHeight()+t].setShip();
+                      intBoard[(int)curHeadDim.getWidth()][(int)curHeadDim.getHeight()+t] = 1;
+                    }
                   }
+
                 }else if(curTailDim.getHeight()<curHeadDim.getHeight()){ //above (y-)
                   for(int t = 0;t<= yDif; t++){
                     playerBoard[(int)curHeadDim.getWidth()][(int)curHeadDim.getHeight()-t].setShip();
@@ -95,10 +103,18 @@ public class PlayerPanel{
     return panel;
     }
 
-    //will return the state of the ships and their locations
-    public Point[][] getGameState(){
-      return playerboard;
-    }
+
+   private boolean testValidity(Ship boat){
+      for (int i = 0; i < boat.getLength(); i++){
+         if (boat.getCoordinate(i, 0) >= HEIGHT || boat.getCoordinate(i,1) >= WIDTH){
+            return false;
+         }
+         if (board[boat.getCoordinate(i,0)][boat.getCoordinate(i,1)]==1){
+            return false;
+         }
+      }
+      return true;
+   }
 
   }
 

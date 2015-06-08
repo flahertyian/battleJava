@@ -2,9 +2,13 @@ public class Ship {
    private int length;
    private int [][] coordinates;
    private int hitsTaken;
-   
+
    //Change row imput to letter
-   
+   /*
+         0-north
+      3-west 1-east
+         2-south
+   */
    //direction 0= vertical, 1 = horizontal
    public Ship (int length, int row, int col, int direction){
       this.length = length;
@@ -19,23 +23,23 @@ public class Ship {
             this.coordinates [i][1] = col;
          }
       }
-      this.hitsTaken = 0;       
+      this.hitsTaken = 0;
    }
-   
+
    public int getLength(){
       return this.length;
    }
-   
+
    public int getCoordinate (int i, int j){
       return this.coordinates[i][j];
    }
-   
+
    public int getHits () {
       return this.hitsTaken;
    }
-   
+
    public void hit() {
       this.hitsTaken++;
    }
-} 
-   
+}
+
