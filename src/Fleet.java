@@ -24,7 +24,7 @@ public class Fleet {
                boat.hit();
                if (boat.getHits() == boat.getLength()){
                   for(int j = 0; j<boat.getLength(); j++){
-                     System.out.print(boat.getCoordinate(j,0) + "" + boat.getCoordinate(j,1));
+                     //System.out.print(boat.getCoordinate(j,0) + "" + boat.getCoordinate(j,1));
                      enemyBoard[boat.getCoordinate(j,1)][boat.getCoordinate(j,0)].setShip();
                   }
                   
