@@ -5,6 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
 
+
 public class battleJavaTester {
 
    public final static int HEIGHT = 10;
@@ -15,14 +16,15 @@ public class battleJavaTester {
 
       Fleet cpuBoats;
 
-      //BufferedImage winScreen;
-      //BufferedImage loseScreen;
+      BufferedImage winScreen;
+      BufferedImage loseScreen;
+      JFrame frame;
 
 
       public battleJavaTester(){
          this.cBoard = new int[10][10];
          //this.pBoard = new int[10][10];
-         JFrame frame = new JFrame();
+         this.frame = new JFrame();
 
          //frame.setLayout(new GridLayout(10, 10));
          frame.setSize(800,800);
@@ -31,12 +33,12 @@ public class battleJavaTester {
          frame.setTitle("BattleJava!!!");
          frame.setLocationRelativeTo(null);
          this.cpuBoats = placeCPUShips(cBoard);
-         
+
          PlayerPanel panel2 = new PlayerPanel(10, 10);
          OceanPanel panel1 = new OceanPanel(10, 10, cpuBoats, panel2, cBoard);
 
          //panel1.setEnemyOcean(cBoard);
-         
+
          //panel.setSize( 400,800 );
          //panel.setMinimumSize(panel.getPreferredSize());
 
@@ -55,15 +57,6 @@ public class battleJavaTester {
 
 
 
-   // public JPanel winScreen(){
-//       JPanel end = new JPanel();
-//       try {
-//           image = ImageIO.read(new File("../resource/battleJavaMurica.png"));
-//        } catch (IOException ex) {
-//          ex.printStackTrace();
-//        }
-// 
-//    }
 
 
    public Fleet placeCPUShips (int [][] cBoard){
