@@ -5,6 +5,8 @@ import javax.imageio.ImageIO;
 import java.awt.Graphics;
 import java.io.File;
 import java.awt.image.BufferedImage;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 
 public class EndOfGame extends JFrame{
@@ -33,10 +35,11 @@ public class EndOfGame extends JFrame{
        } catch (IOException ex) {
          ex.printStackTrace();
        }
-       Graphics g = winScreen.getGraphics();
-       g.drawImage(winScreen,0,0,this);
-       end.paint(g);
-       super.add(end);
+       JLabel label = new JLabel(new ImageIcon(winScreen));
+       // Graphics g = end.getGraphics();;
+       // g.drawImage(winScreen,0,0,this);
+       // end.paint(g);
+       super.add(label);
    }
 
    public void loseScreen(){
@@ -46,10 +49,11 @@ public class EndOfGame extends JFrame{
        } catch (IOException ex) {
          ex.printStackTrace();
        }
-       Graphics g = winScreen.getGraphics();
-       g.drawImage(winScreen,0,0,this);
-       end.paint(g);
-       super.add(end);
+       JLabel label = new JLabel(new ImageIcon(loseScreen));
+       // Graphics g = end.getGraphics();
+       // g.drawImage(loseScreen,0,0,this);
+       // end.paint(g);
+       super.add(label);
 
    }
 

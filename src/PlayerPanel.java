@@ -31,10 +31,10 @@ public class PlayerPanel{
       this.board = new int [10][10];
       this.boats = new Fleet();
       this.cpuLevel = cpuLevel;
-   
+
       makeButtonArr();
       drawBoard();
-   
+
    }
 
    private void makeButtonArr(){
@@ -47,24 +47,24 @@ public class PlayerPanel{
    }
 
    private void drawBoard(){
-   
-   
+
+
       for(int i = 0; i<sizeY; i++){
          for(int j =0; j<sizeX; j++){
             playerBoard[i][j].addActionListener(
                   new ActionListener(){
                      public void actionPerformed(ActionEvent e){
-                     
+
                         if(second){ //if this is the second click
                            Point temp =(Point)e.getSource();
                            curTailDim = temp.getDimension();
-                        
+
                         // 0 no boat, 1 boat, 2 miss, 3 hit
                            if(curHeadDim.getWidth() == curTailDim.getWidth()||
                            curHeadDim.getHeight() == curTailDim.getHeight()){
                               int xDif = (int)Math.abs((Double)(curHeadDim.getWidth() - curTailDim.getWidth()));
                               int yDif = (int)Math.abs((Double)(curHeadDim.getHeight() - curTailDim.getHeight()));
-                           
+
                               if(curTailDim.getHeight()>curHeadDim.getHeight()){//below (y+)
                                  Ship boat = new Ship(yDif+1,(int)curHeadDim.getHeight(),(int)curHeadDim.getWidth(),2);
                                  if(testValidity(boat)){
@@ -77,9 +77,9 @@ public class PlayerPanel{
                                     if(boats.isSet()){
                                     //System.out.println(" AT YA BOYZ");
                                     }
-                                 
+
                                  }
-                              
+
                               }
                               else if(curTailDim.getHeight()<curHeadDim.getHeight()){ //above (y-)
                                  Ship boat = new Ship(yDif+1,(int)curHeadDim.getHeight(),(int)curHeadDim.getWidth(),0);
@@ -91,9 +91,9 @@ public class PlayerPanel{
                                     boats.addShip(boat);
                                     if(boats.isSet()){
                                     //System.out.println(" AT YA BOYZ");
-                                    
+
                                     }
-                                 
+
                                  }
                               }
                               else if(curTailDim.getWidth()>curHeadDim.getWidth()){ // right (x+)
@@ -107,7 +107,7 @@ public class PlayerPanel{
                                     if(boats.isSet()){
                                     //System.out.println(" AT YA BOYZ");
                                     }
-                                 
+
                                  }
                               }
                               else if(curTailDim.getWidth()<curHeadDim.getWidth()){ //left (x-)
@@ -131,7 +131,7 @@ public class PlayerPanel{
                               second = false;
                            //if you have time set some sort of error
                            }
-                        
+
                         }
                         else{ // if it is the fist click (the start point of the ship)
                            Point temp = (Point)e.getSource();
@@ -159,7 +159,7 @@ public class PlayerPanel{
          if (board[boat.getCoordinate(i,0)][boat.getCoordinate(i,1)]==1){
             //System.out.println("test vil false! ahhh");
             return false;
-         }   
+         }
       }
       ArrayList <Integer> lengths = boats.getAllAvailableLengths();
       for(Integer length : lengths){
@@ -171,9 +171,9 @@ public class PlayerPanel{
       return false;
    //      return true;
    }
-   
+
    public void takeCTurn(int random){
-      //Fleet boats, int [][] board, int cpuLevel, int random){    
+      //Fleet boats, int [][] board, int cpuLevel, int random){
       int row = (int) (Math.random()*10);
       int col = (int) (Math.random()*10);
       int [] smartCoordinate = new int [2];
@@ -192,7 +192,7 @@ public class PlayerPanel{
       }
       if(cpuLevel >= 6){
          row = smartCoordinate [0];
-         col = smartCoordinate [1];   
+         col = smartCoordinate [1];
       }
       if((cpuLevel >= 2 && random >= 8 )||(cpuLevel >= 3 && random >= 5)||(cpuLevel>=4 && random >= 3)||(cpuLevel>=5)){
          ArrayList<Integer> rows = new ArrayList<Integer> ();
@@ -226,9 +226,9 @@ public class PlayerPanel{
                                  col = min+i;
                               }
                            }
-                           row = rows.get(0);  
+                           row = rows.get(0);
                         }
-                        else { 
+                        else {
                            int dir = 0;
                            row = rows.get(0);
                            col = getLateHit(cols, col, rand, cpuLevel, row, board, dir);
@@ -251,9 +251,9 @@ public class PlayerPanel{
                                  row = min+i;
                               }
                            }
-                           col = cols.get(0);  
-                        }                        
-                        else { 
+                           col = cols.get(0);
+                        }
+                        else {
                            int dir = 1;
                            col = cols.get(0);
                            row = getLateHit(rows, row, rand, cpuLevel, col, board, dir);
@@ -285,12 +285,12 @@ public class PlayerPanel{
                      else if (rand==3){
                         col--;
                      }
-                  }  
+                  }
                   break findHit;
                }
             }
-         }           
-      }          
+         }
+      }
       if(shotValidity(row, col)){
          board[row][col] += 2;
          //System.out.print("Your oppenent shot at " + row + col + " ");
@@ -300,20 +300,20 @@ public class PlayerPanel{
          else if (board [row][col] == 3){
             //System.out.print("AND HIT");
             playerBoard[col][row].setHit();
-            boats.hit(row, col, playerBoard);   
+            boats.hit(row, col, playerBoard);
             //System.out.println(" YOUR SHIP!");
          }
          if (!boats.floating()){
-            
+            new EndOfGame(false);
             //talk to Ian
          }
-         //printPBoard(board);         
+         //printPBoard(board);
       }
       else {
          takeCTurn(random);
-      }     
+      }
    }
-   
+
    public static int getLateHit(ArrayList <Integer> difs, int dif, int rand, int cpuLevel, int same, int [][] board, int dir){
       if(cpuLevel == 10){
          int min = 10;
@@ -337,7 +337,7 @@ public class PlayerPanel{
             }
             else{
                return max + 1;
-            } 
+            }
          }
          if(dir==1){
             int [] top = getSpaces(min, same, board);
@@ -350,8 +350,8 @@ public class PlayerPanel{
             else{
                return max+1;
             }
-         } 
-      }   
+         }
+      }
       int maxMin = difs.get(0);
       for (int i = 0; i < difs.size(); i++){
          if(rand >= 2){
@@ -378,7 +378,7 @@ public class PlayerPanel{
       }
       coordinate [0] = row;
       coordinate [1] = col;
-      return coordinate;      
+      return coordinate;
    }
 
    public static int [] longestSpaceAvailable(int row, int col, int [][] board){
@@ -392,7 +392,7 @@ public class PlayerPanel{
             }
             else {
                break checkTop;
-            }        
+            }
          }
       }
       checkBottom: {
@@ -402,7 +402,7 @@ public class PlayerPanel{
             }
             else {
                break checkBottom;
-            }        
+            }
          }
       }
       checkLeft: {
@@ -412,7 +412,7 @@ public class PlayerPanel{
             }
             else {
                break checkLeft;
-            }        
+            }
          }
       }
       checkRight: {
@@ -422,7 +422,7 @@ public class PlayerPanel{
             }
             else {
                break checkRight;
-            }        
+            }
          }
       }
       int [] lengths = new int [2];
@@ -436,25 +436,25 @@ public class PlayerPanel{
       }
       return lengths;
    }
-   
+
    public static int [] longestLengthStrategy(int [][] board){
       int [] coordinates = new int [2];
       int max = 1;
       for(int i = 0; i < 10; i++){
          for(int j = 0; j < 10; j++){
-            int [] lengths = longestSpaceAvailable(i,j, board); 
+            int [] lengths = longestSpaceAvailable(i,j, board);
             int rand = (int) (Math.random()*4);
             if ((lengths [0] + lengths [1] > max || (lengths[0]+lengths[1] == max && rand == 0))&& board[i][j] <= 1){
                //arbitrary 1/4 chance of selecting if the same - as to not guess same pattern every time
                max = lengths[0] + lengths[1];
                coordinates [0] = i;
                coordinates [1] = j;
-            }  
+            }
          }
       }
-      return coordinates;                
+      return coordinates;
    }
-   
+
    public static int [] bestGuess (int [][]board, Fleet boats) {
       ArrayList <Integer> lengths = boats.getAllLengths();
       //not actually using info that wouldn't be available to player guesser
@@ -474,10 +474,10 @@ public class PlayerPanel{
             }
          }
          //System.out.println();
-      }  
+      }
       return coordinates;
    }
-   
+
    public static int getNumPossible (ArrayList <Integer> lengths, int [][] board,int row,int col){
       int poss = 0;
       int [] spacesAvailable = getSpaces(row, col, board);
@@ -490,16 +490,16 @@ public class PlayerPanel{
                space [i] = length -1;
             }
          }
-         for(int i = length; i<= space[0]+ space[2] +1; i++){  
+         for(int i = length; i<= space[0]+ space[2] +1; i++){
             poss++;
          }
-         for(int i = length; i<= space[1] + space[3]+1; i++){  
+         for(int i = length; i<= space[1] + space[3]+1; i++){
             poss++;
          }
-      } 
-      return poss; 
+      }
+      return poss;
    }
-         
+
    public static int [] getSpaces (int row,int col,int [][] board){
       int [] spaces = new int [4];
       checkT: {
@@ -509,7 +509,7 @@ public class PlayerPanel{
             }
             else {
                break checkT;
-            }        
+            }
          }
       }
       checkB: {
@@ -519,7 +519,7 @@ public class PlayerPanel{
             }
             else {
                break checkB;
-            }        
+            }
          }
       }
       checkL: {
@@ -529,7 +529,7 @@ public class PlayerPanel{
             }
             else {
                break checkL;
-            }        
+            }
          }
       }
       checkR: {
@@ -539,12 +539,12 @@ public class PlayerPanel{
             }
             else {
                break checkR;
-            }        
+            }
          }
       }
       return spaces;
    }
-   
+
    public boolean isHit (Dimension crd, int [][] board){
       //untested - but should work ... other methods have been returning the board, even if not set as the return
       board[(int)crd.getHeight()][(int)crd.getWidth()] += 2;
@@ -554,14 +554,14 @@ public class PlayerPanel{
       return false;
    }
 
-   
+
    public boolean shotValidity (int row, int col){
       if (row < 10 && 0<= row && col < 10 && 0 <= col && board[row][col]<2){
          return true;
       }
       return false;
    }
-   
+
    public boolean isSet (){
       return boats.isSet();
    }

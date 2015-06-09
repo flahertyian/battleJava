@@ -31,13 +31,13 @@ public class OceanPanel{
       this.enemyOcean = enemyOcean;
       drawBoard();
    }
-   
+
    public void setEnemyOcean(int[][] enemyOcean){
       this.enemyOcean = enemyOcean;
    }
 
    private void drawBoard(){
-   
+
       makeButtonArr();
       for(int i = 0; i<sizeY; i++){
          for(int j =0; j<sizeX; j++){
@@ -49,13 +49,13 @@ public class OceanPanel{
                            Point temp =(Point)e.getSource();
                            Dimension dimension = temp.getDimension();
                            takePTurn (boats, enemyOcean, (int)dimension.getHeight(), (int)dimension.getWidth(), temp, enemyBoard);
-                        }      
+                        }
                      }
                   });
             enemyBoard[i][j].setPreferredSize(new Dimension(20, 20));
             panel.add(enemyBoard[i][j]);
          }
-      } 
+      }
       // g2d.setColor(Color.BLACK);
     // g2d.fillRect(0,0,sizeX,sizeX);
     // g2d.setColor(Color.BLUE);
@@ -65,7 +65,7 @@ public class OceanPanel{
     //   }
     // }
    }
-   
+
    public void takePTurn (Fleet boats, int [][] board, int row, int col, Point temp, Point [][] enemyBoard){
       int random = (int)(Math.random()*10);
       if(shotValidity(row, col, board)){
@@ -80,11 +80,11 @@ public class OceanPanel{
             //System.out.print("HIT");
             boats.hit(row, col, enemyBoard);
             if(!boats.floating()){
-               //talk to Ian  
+               new EndOfGame(true);
             }
             pPanel.takeCTurn(random);
             //System.out.println("!");
-         }  
+         }
       }
       //else{
          //System.out.println("Invalid shot. Try again.");
@@ -92,7 +92,7 @@ public class OceanPanel{
          //look at
       //}
    }
-   
+
    public static boolean shotValidity (int row, int col, int [][] board){
       if (row < 10 && 0<= row && col < 10 && 0 <= col && board[row][col]<2){
          return true;
@@ -103,11 +103,11 @@ public class OceanPanel{
    public JPanel getPanel(){
       return this.panel;
    }
-   
+
    public Point[][] getBoard(){
       return enemyBoard;
    }
-   
+
    private void makeButtonArr(){
       enemyBoard = new Point[sizeX][sizeY];
       for(int y = 0; y<sizeY; y++){
