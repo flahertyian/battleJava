@@ -11,6 +11,7 @@ public class Point extends JButton{
   private ImageIcon ship;
   private ImageIcon sunk;
   private ImageIcon background;
+  private ImageIcon invalid;
   private Dimension dimension;
   private boolean isShip;
 
@@ -23,7 +24,8 @@ public class Point extends JButton{
     ship = new ImageIcon("../resource/battleJavaShip.gif");
     hit = new ImageIcon("../resource/battleJavaHit.gif");
     miss = new ImageIcon("../resource/battleJavaMiss.gif");
-    sunk = new ImageIcon("../resource/battleJavaSunk.gif")
+    sunk = new ImageIcon("../resource/battleJavaSunk.gif");
+    invalid = new ImageIcon("../resource/battleJavaInvalid.gif");
     dimension = new Dimension(x,y);
     isShip = false;
   }
@@ -59,9 +61,14 @@ public class Point extends JButton{
     return dimension;
   }
 
-  //sets the icon for when the ship at this location is sunk
+  //sets the icon for this spicific JButton to a sunk
   public void setSunk(){
     super.setIcon(sunk);
+  }
+
+  //sets the icon to a invalid marker
+  public void setInvalid(){
+    super.setIcon(invalid);
   }
 
 }
