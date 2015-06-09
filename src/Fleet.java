@@ -17,7 +17,7 @@ public class Fleet {
       return false;
    }
    
-   public void hit (int row,int col, Point [][] enemyBoard){
+   public void hit (int row,int col, Point [][] ptBoard){
       for(Ship boat: this.boats){
          for(int i = 0; i < boat.getLength(); i++){
             if(boat.getCoordinate(i,0) == row & boat.getCoordinate(i,1) == col){
@@ -25,7 +25,7 @@ public class Fleet {
                if (boat.getHits() == boat.getLength()){
                   for(int j = 0; j<boat.getLength(); j++){
                      //System.out.print(boat.getCoordinate(j,0) + "" + boat.getCoordinate(j,1));
-                     enemyBoard[boat.getCoordinate(j,1)][boat.getCoordinate(j,0)].setShip();
+                     ptBoard[boat.getCoordinate(j,1)][boat.getCoordinate(j,0)].setSunk();
                   }
                   
                }
@@ -33,6 +33,25 @@ public class Fleet {
          }
       }
    }
+   
+ public void hit (Point [][] ptBoard, int row,int col){
+      for(Ship boat: this.boats){
+         for(int i = 0; i < boat.getLength(); i++){
+            if(boat.getCoordinate(i,0) == row & boat.getCoordinate(i,1) == col){
+               boat.hit();
+               if (boat.getHits() == boat.getLength()){
+                  for(int j = 0; j<boat.getLength(); j++){
+                     //System.out.print(boat.getCoordinate(j,0) + "" + boat.getCoordinate(j,1));
+                     ptBoard[boat.getCoordinate(j,0)][boat.getCoordinate(j,1)].setShip();
+                  }
+                  
+               }
+            }
+         }
+      }
+   }
+   
+   
    
    public ArrayList<Ship> getBoats (){
       return this.boats;
