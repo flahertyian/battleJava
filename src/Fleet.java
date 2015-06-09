@@ -14,6 +14,9 @@ public class Fleet {
             return true;
          }
       }
+      if(this.boats.size()==0){
+         return true;
+      }
       return false;
    }
    
@@ -94,9 +97,9 @@ public class Fleet {
       lengths.add(4);
       lengths.add(5);
       lengths.add(3);
-      ArrayList <Integer> made = getAllLengths();
-      for(Integer length : made){
-         lengths.remove(length);
+      for(Ship boat: this.boats){
+         Integer temp = boat.getLength();
+         lengths.remove(temp);
       }
       return lengths;
    }

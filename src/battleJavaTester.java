@@ -20,6 +20,8 @@ public class battleJavaTester {
 
 
       public battleJavaTester(){
+         Scanner user = new Scanner(System.in);
+         int cpuLevel = chooseCPULevel(user);
          this.cBoard = new int[10][10];
          //this.pBoard = new int[10][10];
          JFrame frame = new JFrame();
@@ -32,7 +34,8 @@ public class battleJavaTester {
          frame.setLocationRelativeTo(null);
          this.cpuBoats = placeCPUShips(cBoard);
          
-         PlayerPanel panel2 = new PlayerPanel(10, 10);
+         PlayerPanel panel2 = new PlayerPanel(10, 10, cpuLevel);
+         //set cpuLevel
          OceanPanel panel1 = new OceanPanel(10, 10, cpuBoats, panel2, cBoard);
 
          //panel1.setEnemyOcean(cBoard);
@@ -116,6 +119,21 @@ public class battleJavaTester {
       battleJavaTester runner = new battleJavaTester();
 
    }
+   
+   public static int chooseCPULevel (Scanner user) {
+      System.out.println();
+      System.out.println("What level would you like the computer to be? (1-10)");
+      int cpuLevel = user.nextInt();
+      if(cpuLevel > 0 && cpuLevel <= 10){
+         return cpuLevel;
+      }
+      else{
+         System.out.println("Invalid level. Please try again.");
+         cpuLevel = chooseCPULevel (user);
+      }
+      return cpuLevel;  
+   }
+
 
 }
 

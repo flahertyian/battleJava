@@ -74,18 +74,19 @@ public class OceanPanel{
    }
    
     public void takePTurn (Fleet boats, int [][] board, int row, int col, Point temp, Point [][] enemyBoard){
+         int random = (int)(Math.random()*10);
          if(shotValidity(row, col, board)){
          board[row][col] += 2;
          if (board[row][col] == 2){
             temp.setMiss();
-            pPanel.takeCTurn();
+            pPanel.takeCTurn(random);
             //System.out.println("MISS!");
          }
          else if (board[row][col] == 3) {
             temp.setHit();
             //System.out.print("HIT");
             boats.hit(row, col, enemyBoard);
-            pPanel.takeCTurn();
+            pPanel.takeCTurn(random);
             
             //System.out.println("!");
          }  
