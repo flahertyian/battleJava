@@ -12,7 +12,14 @@ public class battleJavaTester {
 
       int[][] cBoard;
       int[][] pBoard;
+<<<<<<< HEAD
       Fleet cpuBoats;
+=======
+      Fleet boats;
+      BufferedImage winScreen;
+      BufferedImage loseScreen;
+
+>>>>>>> cf4c1ce6233a233fc166ccf0754c7a4ce8ba79a2
 
 
       public battleJavaTester(){
@@ -45,7 +52,21 @@ public class battleJavaTester {
 
          frame.setVisible(true);
 
+
+
       }
+
+
+
+   public JPanel winScreen(){
+      JPanel end = new JPanel();
+      try {
+          image = ImageIO.read(new File("../resource/battleJavaMurica.png"));
+       } catch (IOException ex) {
+         ex.printStackTrace();
+       }
+
+   }
 
 
    public Fleet placeCPUShips (int [][] cBoard){

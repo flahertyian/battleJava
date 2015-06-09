@@ -122,9 +122,15 @@ public class PlayerPanel{
                 }
                 second = false;
               }else{
+<<<<<<< HEAD
                 //System.out.println("invalid placement");
                 second = false;
                 //if you have time set some sort of error
+=======
+                System.out.println("invalid placement");
+                playerBoard[(int)curTailDim.getWidth()][(int)curTailDim.getHeight()].setInvalid();
+                playerBoard[(int)curTailDim.getWidth()][(int)curTailDim.getHeight()].setBackground();
+>>>>>>> cf4c1ce6233a233fc166ccf0754c7a4ce8ba79a2
               }
 
             }else{ // if it is the fist click (the start point of the ship)
