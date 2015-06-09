@@ -303,6 +303,10 @@ public class PlayerPanel{
             boats.hit(row, col, playerBoard);   
             //System.out.println(" YOUR SHIP!");
          }
+         if (!boats.floating()){
+            
+            //talk to Ian
+         }
          //printPBoard(board);         
       }
       else {

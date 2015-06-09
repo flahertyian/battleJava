@@ -61,9 +61,7 @@ public class OceanPanel{
     // g2d.setColor(Color.BLUE);
     // for(int r = 0; r < sizeX; r ++){
     //   for(int c = 0; c < sizeY; c++) {
-   
         //the drawing of the cubes to the image
-   
     //   }
     // }
    }
@@ -81,6 +79,9 @@ public class OceanPanel{
             temp.setHit();
             //System.out.print("HIT");
             boats.hit(row, col, enemyBoard);
+            if(!boats.floating()){
+               //talk to Ian  
+            }
             pPanel.takeCTurn(random);
             //System.out.println("!");
          }  

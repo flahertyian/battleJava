@@ -29,8 +29,7 @@ public class Fleet {
                   for(int j = 0; j<boat.getLength(); j++){
                      //System.out.print(boat.getCoordinate(j,0) + "" + boat.getCoordinate(j,1));
                      ptBoard[boat.getCoordinate(j,1)][boat.getCoordinate(j,0)].setSunk();
-                  }
-                  
+                  }  
                }
             }
          }
