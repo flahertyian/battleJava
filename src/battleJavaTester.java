@@ -10,53 +10,40 @@ public class battleJavaTester {
    public final static int HEIGHT = 10;
    public final static int WIDTH = 10;
 
-      int[][] cBoard;
-      int[][] pBoard;
+   int[][] cBoard;
+   int[][] pBoard;
 
-      Fleet cpuBoats;
+   Fleet cpuBoats;
+  //BufferedImage winScreen;
+  //BufferedImage loseScreen;
 
-      //BufferedImage winScreen;
-      //BufferedImage loseScreen;
-
-
-      public battleJavaTester(){
-         Scanner user = new Scanner(System.in);
-         int cpuLevel = chooseCPULevel(user);
-         this.cBoard = new int[10][10];
+   public battleJavaTester(){
+      Scanner user = new Scanner(System.in);
+      int cpuLevel = chooseCPULevel(user);
+      this.cBoard = new int[10][10];
          //this.pBoard = new int[10][10];
-         JFrame frame = new JFrame();
-
+      JFrame frame = new JFrame();
          //frame.setLayout(new GridLayout(10, 10));
-         frame.setSize(800,800);
-         frame.setResizable(false);
-         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-         frame.setTitle("BattleJava!!!");
-         frame.setLocationRelativeTo(null);
-         this.cpuBoats = placeCPUShips(cBoard);
+      frame.setSize(800,800);
+      frame.setResizable(false);
+      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      frame.setTitle("BattleJava!!!");
+      frame.setLocationRelativeTo(null);
+      this.cpuBoats = placeCPUShips(cBoard);
          
-         PlayerPanel panel2 = new PlayerPanel(10, 10, cpuLevel);
+      PlayerPanel panel2 = new PlayerPanel(10, 10, cpuLevel);
          //set cpuLevel
-         OceanPanel panel1 = new OceanPanel(10, 10, cpuBoats, panel2, cBoard);
-
-         //panel1.setEnemyOcean(cBoard);
-         
+      OceanPanel panel1 = new OceanPanel(10, 10, cpuBoats, panel2, cBoard);
+         //panel1.setEnemyOcean(cBoard);  
          //panel.setSize( 400,800 );
          //panel.setMinimumSize(panel.getPreferredSize());
-
-         JPanel box = new JPanel();
-
-         box.setLayout(new BoxLayout(box,BoxLayout.Y_AXIS));
-         box.add(panel1.getPanel());
-         box.add(panel2.getPanel());
-         frame.add(box);
-
-         frame.setVisible(true);
-
-
-
-      }
-
-
+      JPanel box = new JPanel();
+      box.setLayout(new BoxLayout(box,BoxLayout.Y_AXIS));
+      box.add(panel1.getPanel());
+      box.add(panel2.getPanel());
+      frame.add(box);
+      frame.setVisible(true);
+   }
 
    // public JPanel winScreen(){
 //       JPanel end = new JPanel();
@@ -67,7 +54,6 @@ public class battleJavaTester {
 //        }
 // 
 //    }
-
 
    public Fleet placeCPUShips (int [][] cBoard){
       //genirates new fleet
@@ -117,7 +103,6 @@ public class battleJavaTester {
 
    public static void main (String [] args){
       battleJavaTester runner = new battleJavaTester();
-
    }
    
    public static int chooseCPULevel (Scanner user) {
@@ -133,8 +118,6 @@ public class battleJavaTester {
       }
       return cpuLevel;  
    }
-
-
 }
 
 

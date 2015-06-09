@@ -27,13 +27,12 @@ public class Ship {
             this.coordinates [i][0] = row+i;
             this.coordinates [i][1] = col;
             //System.out.println(this.coordinates [i][0] + " " + this.coordinates [i][1]);
-
+         
          }
          else if (direction == 3){
             this.coordinates [i][0] = row;
             this.coordinates [i][1] = col-i;
             //System.out.println(this.coordinates [i][0] + " " + this.coordinates [i][1]);
-
          }
       }
       this.hitsTaken = 0;

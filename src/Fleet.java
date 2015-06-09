@@ -47,14 +47,11 @@ public class Fleet {
                      //System.out.print(boat.getCoordinate(j,0) + "" + boat.getCoordinate(j,1));
                      ptBoard[boat.getCoordinate(j,0)][boat.getCoordinate(j,1)].setShip();
                   }
-                  
                }
             }
          }
       }
    }
-   
-   
    
    public ArrayList<Ship> getBoats (){
       return this.boats;
@@ -112,7 +109,5 @@ public class Fleet {
       }
       return false;
    }
-      
-      
-      
+        
 }

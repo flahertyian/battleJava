@@ -22,8 +22,6 @@ public class PlayerPanel{
    private Fleet boats;
    private int cpuLevel;
 
-  
-
    public PlayerPanel(int sizeX, int sizeY, int cpuLevel){
       this.sizeY = sizeY;
       this.sizeX = sizeX;
