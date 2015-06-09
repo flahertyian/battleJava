@@ -17,7 +17,7 @@ public class battleJavaTester {
 
       public battleJavaTester(){
          this.cBoard = new int[10][10];
-         this.pBoard = new int[10][10];
+         //this.pBoard = new int[10][10];
          JFrame frame = new JFrame();
 
          //frame.setLayout(new GridLayout(10, 10));
@@ -26,13 +26,13 @@ public class battleJavaTester {
          frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
          frame.setTitle("BattleJava!!!");
          frame.setLocationRelativeTo(null);
-
-
          this.boats = placeCPUShips(cBoard);
-         OceanPanel panel1 = new OceanPanel(10, 10, boats);
+         
+         PlayerPanel panel2 = new PlayerPanel(10, 10);
+         OceanPanel panel1 = new OceanPanel(10, 10, boats, panel2);
 
          panel1.setEnemyOcean(cBoard);
-         PlayerPanel panel2 = new PlayerPanel(10, 10,pBoard);
+         
          //panel.setSize( 400,800 );
          //panel.setMinimumSize(panel.getPreferredSize());
 

@@ -19,14 +19,16 @@ public class OceanPanel{
    Fleet boats;
    int HEIGHT = 10;
    int WIDTH = 10;
+   PlayerPanel pPanel;
    
 
-   public OceanPanel(int sizeX, int sizeY, Fleet boats){
+   public OceanPanel(int sizeX, int sizeY, Fleet boats, PlayerPanel pPanel){
       this.sizeY = sizeY;
       this.sizeX = sizeX;
       this.grid = new GridLayout(10,10);
       this.panel = new JPanel(grid);
       this.boats = boats;
+      this.pPanel = pPanel;
       drawBoard();
    }
    
@@ -88,17 +90,20 @@ public class OceanPanel{
     // }
    }
    
-    public static void takePTurn (Fleet boats, int [][] board, int row, int col, Point temp, Point [][] enemyBoard){
+    public void takePTurn (Fleet boats, int [][] board, int row, int col, Point temp, Point [][] enemyBoard){
          if(shotValidity(row, col, board)){
          board[row][col] += 2;
          if (board[row][col] == 2){
             temp.setMiss();
+            pPanel.takeCTurn();
             //System.out.println("MISS!");
          }
-         else {
+         else if (board[row][col] == 3) {
             temp.setHit();
             //System.out.print("HIT");
             boats.hit(row, col, enemyBoard);
+            pPanel.takeCTurn();
+            
             //System.out.println("!");
          }  
       }

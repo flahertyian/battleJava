@@ -23,7 +23,7 @@ public class Point extends JButton{
     ship = new ImageIcon("../resource/battleJavaShip.gif");
     hit = new ImageIcon("../resource/battleJavaHit.gif");
     miss = new ImageIcon("../resource/battleJavaMiss.gif");
-    sunk = new ImageIcon("../resource/battleJavaSunk.gif")
+    sunk = new ImageIcon("../resource/battleJavaSunk.gif");
     dimension = new Dimension(x,y);
     isShip = false;
   }
