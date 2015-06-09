@@ -20,15 +20,17 @@ public class OceanPanel{
    int HEIGHT = 10;
    int WIDTH = 10;
    PlayerPanel pPanel;
+
    
 
-   public OceanPanel(int sizeX, int sizeY, Fleet boats, PlayerPanel pPanel){
+   public OceanPanel(int sizeX, int sizeY, Fleet boats, PlayerPanel pPanel, int [][] enemyOcean){
       this.sizeY = sizeY;
       this.sizeX = sizeX;
       this.grid = new GridLayout(10,10);
       this.panel = new JPanel(grid);
       this.boats = boats;
       this.pPanel = pPanel;
+      this.enemyOcean = enemyOcean;
       drawBoard();
    }
    
@@ -45,30 +47,11 @@ public class OceanPanel{
             enemyBoard[i][j].addActionListener(
                   new ActionListener(){
                      public void actionPerformed(ActionEvent e){
-                        Point temp =(Point)e.getSource();
-                        Dimension dimension = temp.getDimension();
-                        takePTurn (boats, enemyOcean, (int)dimension.getHeight(), (int)dimension.getWidth(), temp, enemyBoard);
-                                          
-
-                        
-                        
-                        
-                        /*if(enemyOcean[(int)dimension.getHeight()][(int)dimension.getWidth()] == 1){
-                           
-                           temp.setHit();
-                           
-                           
-                           //check if sunk, change if so
-                           
-                           //call CPU Guesser
-                           
-                           //System.out.println(dimension.getHeight() + " : " + dimension.getWidth());
-                        
-                        }
-                       else{
-                           temp.setMiss();
-                        }
-                        */
+                        if(pPanel.isSet()){
+                           Point temp =(Point)e.getSource();
+                           Dimension dimension = temp.getDimension();
+                           takePTurn (boats, enemyOcean, (int)dimension.getHeight(), (int)dimension.getWidth(), temp, enemyBoard);
+                        }      
                      }
                   });
             enemyBoard[i][j].setPreferredSize(new Dimension(20, 20));

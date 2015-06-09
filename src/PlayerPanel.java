@@ -20,6 +20,7 @@ public class PlayerPanel{
   private Point[][] playerBoard;
   private int[][] board;
   private Fleet boats;
+
   
 
   public PlayerPanel(int sizeX, int sizeY){
@@ -29,6 +30,7 @@ public class PlayerPanel{
     this.panel = new JPanel(grid);
     second = false;
     this.board = new int [10][10];
+    this.boats = new Fleet();
 
     makeButtonArr();
     drawBoard();
@@ -63,43 +65,65 @@ public class PlayerPanel{
                 int yDif = (int)Math.abs((Double)(curHeadDim.getHeight() - curTailDim.getHeight()));
 
                 if(curTailDim.getHeight()>curHeadDim.getHeight()){//below (y+)
-                  Ship boat = new Ship(yDif,(int)curHeadDim.getHeight(),(int)curHeadDim.getWidth(),2);
+                  Ship boat = new Ship(yDif+1,(int)curHeadDim.getHeight(),(int)curHeadDim.getWidth(),2);
                   if(testValidity(boat)){
                     for(int t = 0;t<= yDif; t++){
                       playerBoard[(int)curHeadDim.getWidth()][(int)curHeadDim.getHeight()+t].setShip();
                       board[(int)curHeadDim.getHeight()+t][(int)curHeadDim.getWidth()] = 1;
-                      System.out.print((int)curHeadDim.getHeight()+t+""+(int)curHeadDim.getWidth());
+                      //System.out.print((int)curHeadDim.getHeight()+t+""+(int)curHeadDim.getWidth());
                     }
+                    boats.addShip(boat);
+                    if(boats.isSet()){
+                     System.out.println(" AT YA BOYZ");
+                    }
+
                   }
 
                 }else if(curTailDim.getHeight()<curHeadDim.getHeight()){ //above (y-)
-                  Ship boat = new Ship(yDif,(int)curHeadDim.getHeight(),(int)curHeadDim.getWidth(),0);
+                  Ship boat = new Ship(yDif+1,(int)curHeadDim.getHeight(),(int)curHeadDim.getWidth(),0);
                   if(testValidity(boat)){
                     for(int t = 0;t<= yDif; t++){
                       playerBoard[(int)curHeadDim.getWidth()][(int)curHeadDim.getHeight()-t].setShip();
                       board[(int)curHeadDim.getHeight()-t][(int)curHeadDim.getWidth()] = 1;
                     }
+                    boats.addShip(boat);
+                    if(boats.isSet()){
+                     //System.out.println(" AT YA BOYZ");
+                     
+                    }
+
                   }
                 }else if(curTailDim.getWidth()>curHeadDim.getWidth()){ // right (x+)
-                  Ship boat = new Ship(xDif,(int)curHeadDim.getHeight(),(int)curHeadDim.getWidth(),1);
+                  Ship boat = new Ship(xDif+1,(int)curHeadDim.getHeight(),(int)curHeadDim.getWidth(),1);
                   if(testValidity(boat)){
                     for(int t = 0; t<= xDif; t++){
                       playerBoard[(int)curHeadDim.getWidth()+t][(int)curHeadDim.getHeight()].setShip();
                       board[(int)curHeadDim.getHeight()][(int)curHeadDim.getWidth()+t] = 1;
                     }
+                    boats.addShip(boat);
+                    if(boats.isSet()){
+                     System.out.println(" AT YA BOYZ");
+                    }
+
                   }
                 }else if(curTailDim.getWidth()<curHeadDim.getWidth()){ //left (x-)
-                  Ship boat = new Ship(xDif,(int)curHeadDim.getHeight(),(int)curHeadDim.getWidth(),3);
+                  Ship boat = new Ship(xDif+1,(int)curHeadDim.getHeight(),(int)curHeadDim.getWidth(),3);
                   if(testValidity(boat)){
                     for(int t = 0; t <= xDif; t++){
                       playerBoard[(int)curHeadDim.getWidth()-t][(int)curHeadDim.getHeight()].setShip();
                       board[(int)curHeadDim.getHeight()][(int)curHeadDim.getWidth()-t] = 1;
                     }
+                    boats.addShip(boat);
+                    if(boats.isSet()){
+                     System.out.println(" AT YA BOYZ");
+                     //OceanPanel panel1 = new OceanPanel(10, 10, cpuBoats, panel2, cBoard);
+                    }
                   }
                 }
                 second = false;
               }else{
-                System.out.println("invalid placement");
+                //System.out.println("invalid placement");
+                second = false;
                 //if you have time set some sort of error
               }
 
@@ -129,16 +153,24 @@ public class PlayerPanel{
          if (board[boat.getCoordinate(i,0)][boat.getCoordinate(i,1)]==1){
             System.out.println("test vil false! ahhh");
             return false;
+         }   
+      }
+      ArrayList <Integer> lengths = boats.getAllAvailableLengths();
+      for(Integer length : lengths){
+         if(boat.getLength()== length){
+            lengths.remove(length);
+            return true;
          }
       }
-      return true;
+      return false;
+//      return true;
    }
    
    public void takeCTurn(){
       //Fleet boats, int [][] board, int cpuLevel, int random){    
       int row = (int) (Math.random()*10);
       int col = (int) (Math.random()*10);
-      //in t [] smartCoordinate = new int [2];
+      // int [] smartCoordinate = new int [2];
 //       int length = boats.getShortestBoard();
 //       if(cpuLevel >= 9){
 //          smartCoordinate = bestGuess(board, boats);
@@ -263,8 +295,9 @@ public class PlayerPanel{
          }
          else if (board [row][col] == 3){
             //System.out.print("AND HIT");
-            //boats.hit(playerBoard, row, col);
             playerBoard[col][row].setHit();
+            boats.hit(row, col, playerBoard);
+            
             //System.out.println(" YOUR SHIP!");
          }
          //printPBoard(board);         
@@ -280,8 +313,11 @@ public class PlayerPanel{
       }
       return false;
    }
+   
+   public boolean isSet (){
+      return boats.isSet();
 
    }
 
-//  }
+  }
 

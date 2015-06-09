@@ -16,19 +16,23 @@ public class Ship {
          if (direction == 1){
             this.coordinates [i][0] = row;
             this.coordinates [i][1] = col+i;
+            //System.out.println(this.coordinates [i][0] + " " + this.coordinates [i][1]);
          }
          else if (direction == 0){
             this.coordinates [i][0] = row - i;
             this.coordinates [i][1] = col ;
+            //System.out.println(this.coordinates [i][0] + " " + this.coordinates [i][1]);
          }
          else if (direction == 2){
             this.coordinates [i][0] = row+i;
             this.coordinates [i][1] = col;
+            //System.out.println(this.coordinates [i][0] + " " + this.coordinates [i][1]);
 
          }
          else if (direction == 3){
             this.coordinates [i][0] = row;
             this.coordinates [i][1] = col-i;
+            //System.out.println(this.coordinates [i][0] + " " + this.coordinates [i][1]);
 
          }
       }

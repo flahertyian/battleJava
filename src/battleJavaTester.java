@@ -12,7 +12,7 @@ public class battleJavaTester {
 
       int[][] cBoard;
       int[][] pBoard;
-      Fleet boats;
+      Fleet cpuBoats;
 
 
       public battleJavaTester(){
@@ -26,12 +26,12 @@ public class battleJavaTester {
          frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
          frame.setTitle("BattleJava!!!");
          frame.setLocationRelativeTo(null);
-         this.boats = placeCPUShips(cBoard);
+         this.cpuBoats = placeCPUShips(cBoard);
          
          PlayerPanel panel2 = new PlayerPanel(10, 10);
-         OceanPanel panel1 = new OceanPanel(10, 10, boats, panel2);
+         OceanPanel panel1 = new OceanPanel(10, 10, cpuBoats, panel2, cBoard);
 
-         panel1.setEnemyOcean(cBoard);
+         //panel1.setEnemyOcean(cBoard);
          
          //panel.setSize( 400,800 );
          //panel.setMinimumSize(panel.getPreferredSize());

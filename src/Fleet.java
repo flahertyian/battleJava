@@ -86,4 +86,30 @@ public class Fleet {
       }
       return lengths;
    }
+   
+   public ArrayList <Integer> getAllAvailableLengths(){
+      ArrayList<Integer> lengths = new ArrayList <Integer> ();
+      lengths.add(2);
+      lengths.add(3);
+      lengths.add(4);
+      lengths.add(5);
+      lengths.add(3);
+      ArrayList <Integer> made = getAllLengths();
+      for(Integer length : made){
+         lengths.remove(length);
+      }
+      return lengths;
+   }
+   
+   public boolean isSet (){
+      ArrayList <Integer> avalLengths = getAllAvailableLengths();
+      if(avalLengths.size()==0){
+         //System.out.println("HOLLLLA");
+         return true;
+      }
+      return false;
+   }
+      
+      
+      
 }
