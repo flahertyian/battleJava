@@ -5,6 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
 
+
 public class battleJavaTester {
 
    public final static int HEIGHT = 10;
@@ -16,6 +17,7 @@ public class battleJavaTester {
    Fleet cpuBoats;
   //BufferedImage winScreen;
   //BufferedImage loseScreen;
+
 
    public battleJavaTester(){
       Scanner user = new Scanner(System.in);
@@ -30,11 +32,11 @@ public class battleJavaTester {
       frame.setTitle("BattleJava!!!");
       frame.setLocationRelativeTo(null);
       this.cpuBoats = placeCPUShips(cBoard);
-         
+
       PlayerPanel panel2 = new PlayerPanel(10, 10, cpuLevel);
          //set cpuLevel
       OceanPanel panel1 = new OceanPanel(10, 10, cpuBoats, panel2, cBoard);
-         //panel1.setEnemyOcean(cBoard);  
+         //panel1.setEnemyOcean(cBoard);
          //panel.setSize( 400,800 );
          //panel.setMinimumSize(panel.getPreferredSize());
       JPanel box = new JPanel();
@@ -45,15 +47,6 @@ public class battleJavaTester {
       frame.setVisible(true);
    }
 
-   // public JPanel winScreen(){
-//       JPanel end = new JPanel();
-//       try {
-//           image = ImageIO.read(new File("../resource/battleJavaMurica.png"));
-//        } catch (IOException ex) {
-//          ex.printStackTrace();
-//        }
-// 
-//    }
 
    public Fleet placeCPUShips (int [][] cBoard){
       //genirates new fleet
@@ -104,7 +97,7 @@ public class battleJavaTester {
    public static void main (String [] args){
       battleJavaTester runner = new battleJavaTester();
    }
-   
+
    public static int chooseCPULevel (Scanner user) {
       System.out.println();
       System.out.println("What level would you like the computer to be? (1-10)");
@@ -116,7 +109,7 @@ public class battleJavaTester {
          System.out.println("Invalid level. Please try again.");
          cpuLevel = chooseCPULevel (user);
       }
-      return cpuLevel;  
+      return cpuLevel;
    }
 }
 
