@@ -304,8 +304,12 @@ public class PlayerPanel{
             //System.out.println(" YOUR SHIP!");
          }
          if (!boats.floating()){
+<<<<<<< HEAD
             new EndOfGame(false);
             //talk to Ian
+=======
+             //talk to Ian
+>>>>>>> 1016c16eaac725743b34ace2917048316c8d2ddc
          }
          //printPBoard(board);
       }

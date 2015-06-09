@@ -18,7 +18,7 @@ public class battleJavaTester {
   //BufferedImage winScreen;
   //BufferedImage loseScreen;
 
-
+   //runs the game
    public battleJavaTester(){
       Scanner user = new Scanner(System.in);
       int cpuLevel = chooseCPULevel(user);
@@ -47,7 +47,7 @@ public class battleJavaTester {
       frame.setVisible(true);
    }
 
-
+   //places computer ships randomly
    public Fleet placeCPUShips (int [][] cBoard){
       //genirates new fleet
       Fleet cFleet =  new Fleet();
@@ -81,7 +81,9 @@ public class battleJavaTester {
       }
       return cFleet;
    }
-
+   
+   //checks whether the ship place is valid
+   //imports the board which indicates empty/boat/miss/hit and the ship that is trying to be placed
    public boolean testValidity(Ship boat,int[][] board){
       for (int i = 0; i < boat.getLength(); i++){
          if (boat.getCoordinate(i, 0) >= HEIGHT || boat.getCoordinate(i,1) >= WIDTH){
@@ -93,11 +95,13 @@ public class battleJavaTester {
       }
       return true;
    }
-
+   //calls the method that runs the program
    public static void main (String [] args){
       battleJavaTester runner = new battleJavaTester();
    }
 
+   //lets user choose how good computer is
+   //imports user Scanner
    public static int chooseCPULevel (Scanner user) {
       System.out.println();
       System.out.println("What level would you like the computer to be? (1-10)");
