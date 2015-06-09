@@ -15,7 +15,6 @@ public class Point extends JButton{
   private Dimension dimension;
   private boolean isShip;
 
-
   public Point(int x, int y){
     background = new ImageIcon("../resource/battleJavaBase.gif");
     super.setIcon(background);
@@ -70,5 +69,5 @@ public class Point extends JButton{
   public void setInvalid(){
     super.setIcon(invalid);
   }
-
+  
 }

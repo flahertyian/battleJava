@@ -21,8 +21,6 @@ public class OceanPanel{
    int WIDTH = 10;
    PlayerPanel pPanel;
 
-   
-
    public OceanPanel(int sizeX, int sizeY, Fleet boats, PlayerPanel pPanel, int [][] enemyOcean){
       this.sizeY = sizeY;
       this.sizeX = sizeX;
@@ -57,10 +55,7 @@ public class OceanPanel{
             enemyBoard[i][j].setPreferredSize(new Dimension(20, 20));
             panel.add(enemyBoard[i][j]);
          }
-      }
-      
-      
-      
+      } 
       // g2d.setColor(Color.BLACK);
     // g2d.fillRect(0,0,sizeX,sizeX);
     // g2d.setColor(Color.BLUE);
@@ -73,20 +68,20 @@ public class OceanPanel{
     // }
    }
    
-    public void takePTurn (Fleet boats, int [][] board, int row, int col, Point temp, Point [][] enemyBoard){
-         if(shotValidity(row, col, board)){
+   public void takePTurn (Fleet boats, int [][] board, int row, int col, Point temp, Point [][] enemyBoard){
+      int random = (int)(Math.random()*10);
+      if(shotValidity(row, col, board)){
          board[row][col] += 2;
          if (board[row][col] == 2){
             temp.setMiss();
-            pPanel.takeCTurn();
+            pPanel.takeCTurn(random);
             //System.out.println("MISS!");
          }
          else if (board[row][col] == 3) {
             temp.setHit();
             //System.out.print("HIT");
             boats.hit(row, col, enemyBoard);
-            pPanel.takeCTurn();
-            
+            pPanel.takeCTurn(random);
             //System.out.println("!");
          }  
       }
@@ -104,8 +99,6 @@ public class OceanPanel{
       return false;
    }
 
-
-
    public JPanel getPanel(){
       return this.panel;
    }
@@ -122,8 +115,4 @@ public class OceanPanel{
          }
       }
    }
-   
-
-
-
 }

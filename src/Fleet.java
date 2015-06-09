@@ -14,6 +14,9 @@ public class Fleet {
             return true;
          }
       }
+      if(this.boats.size()==0){
+         return true;
+      }
       return false;
    }
    
@@ -44,14 +47,11 @@ public class Fleet {
                      //System.out.print(boat.getCoordinate(j,0) + "" + boat.getCoordinate(j,1));
                      ptBoard[boat.getCoordinate(j,0)][boat.getCoordinate(j,1)].setShip();
                   }
-                  
                }
             }
          }
       }
    }
-   
-   
    
    public ArrayList<Ship> getBoats (){
       return this.boats;
@@ -94,9 +94,9 @@ public class Fleet {
       lengths.add(4);
       lengths.add(5);
       lengths.add(3);
-      ArrayList <Integer> made = getAllLengths();
-      for(Integer length : made){
-         lengths.remove(length);
+      for(Ship boat: this.boats){
+         Integer temp = boat.getLength();
+         lengths.remove(temp);
       }
       return lengths;
    }
@@ -109,7 +109,5 @@ public class Fleet {
       }
       return false;
    }
-      
-      
-      
+        
 }
